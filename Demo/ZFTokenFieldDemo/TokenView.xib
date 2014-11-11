@@ -7,30 +7,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="210" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="210" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1lF-Pg-CpK">
-                    <rect key="frame" x="13" y="10" width="30" height="30"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="1We-AU-Wxy"/>
-                        <constraint firstAttribute="width" constant="30" id="XqX-bc-VKK"/>
-                    </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="15"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UY5-oP-PPy">
-                    <rect key="frame" x="51" y="0.0" width="123" height="50"/>
+                    <rect key="frame" x="46" y="0.0" width="128" height="40"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SmW-c7-Sal">
-                    <rect key="frame" x="182" y="15" width="20" height="20"/>
+                    <rect key="frame" x="182" y="10" width="20" height="20"/>
                     <color key="backgroundColor" white="0.82696854440789469" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="J2b-fa-hPE"/>
@@ -48,17 +35,30 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </button>
+                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1lF-Pg-CpK">
+                    <rect key="frame" x="8" y="5" width="30" height="30"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="1We-AU-Wxy"/>
+                        <constraint firstAttribute="width" constant="30" id="XqX-bc-VKK"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.95094058388157909" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="SmW-c7-Sal" secondAttribute="bottom" constant="15" id="0Xs-K0-tf2"/>
-                <constraint firstItem="SmW-c7-Sal" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="1e4-7g-3Mm"/>
-                <constraint firstItem="1lF-Pg-CpK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="FiF-gW-0K4"/>
+                <constraint firstAttribute="bottom" secondItem="SmW-c7-Sal" secondAttribute="bottom" constant="10" id="0Xs-K0-tf2"/>
+                <constraint firstItem="SmW-c7-Sal" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="1e4-7g-3Mm"/>
+                <constraint firstItem="1lF-Pg-CpK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="FiF-gW-0K4"/>
                 <constraint firstAttribute="trailing" secondItem="SmW-c7-Sal" secondAttribute="trailing" constant="8" id="NU6-Vo-GDk"/>
                 <constraint firstItem="UY5-oP-PPy" firstAttribute="leading" secondItem="1lF-Pg-CpK" secondAttribute="trailing" constant="8" id="S62-Oo-9Mv"/>
-                <constraint firstItem="1lF-Pg-CpK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="WLY-VX-PnU"/>
+                <constraint firstItem="1lF-Pg-CpK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="WLY-VX-PnU"/>
                 <constraint firstItem="SmW-c7-Sal" firstAttribute="leading" secondItem="UY5-oP-PPy" secondAttribute="trailing" constant="8" id="cae-2c-G5E"/>
-                <constraint firstAttribute="bottom" secondItem="1lF-Pg-CpK" secondAttribute="bottom" constant="10" id="eS4-Ib-rUk"/>
+                <constraint firstAttribute="bottom" secondItem="1lF-Pg-CpK" secondAttribute="bottom" constant="5" id="eS4-Ib-rUk"/>
                 <constraint firstItem="UY5-oP-PPy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sbX-5P-wS4"/>
                 <constraint firstAttribute="bottom" secondItem="UY5-oP-PPy" secondAttribute="bottom" id="y7M-Ck-xUz"/>
             </constraints>
@@ -66,7 +66,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                    <integer key="value" value="25"/>
+                    <integer key="value" value="20"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="-3" y="158"/>
