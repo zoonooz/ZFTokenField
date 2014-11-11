@@ -1,0 +1,448 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DC233D3B1A1204F70046D2A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC233D3A1A1204F70046D2A8 /* main.m */; };
+		DC233D3E1A1204F70046D2A8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC233D3D1A1204F70046D2A8 /* AppDelegate.m */; };
+		DC233D411A1204F70046D2A8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC233D401A1204F70046D2A8 /* ViewController.m */; };
+		DC233D441A1204F70046D2A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC233D421A1204F70046D2A8 /* Main.storyboard */; };
+		DC233D461A1204F70046D2A8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC233D451A1204F70046D2A8 /* Images.xcassets */; };
+		DC233D491A1204F70046D2A8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC233D471A1204F70046D2A8 /* LaunchScreen.xib */; };
+		DC233D551A1204F70046D2A8 /* ZFTokenFieldDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC233D541A1204F70046D2A8 /* ZFTokenFieldDemoTests.m */; };
+		DC233D611A1205FE0046D2A8 /* ZFTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = DC233D601A1205FE0046D2A8 /* ZFTokenField.m */; };
+		DC233D631A120FD50046D2A8 /* TokenView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC233D621A120FD50046D2A8 /* TokenView.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DC233D4F1A1204F70046D2A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC233D2D1A1204F70046D2A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC233D341A1204F70046D2A8;
+			remoteInfo = ZFTokenFieldDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DC233D351A1204F70046D2A8 /* ZFTokenFieldDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZFTokenFieldDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC233D391A1204F70046D2A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC233D3A1A1204F70046D2A8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DC233D3C1A1204F70046D2A8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DC233D3D1A1204F70046D2A8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DC233D3F1A1204F70046D2A8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DC233D401A1204F70046D2A8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DC233D431A1204F70046D2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DC233D451A1204F70046D2A8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DC233D481A1204F70046D2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		DC233D4E1A1204F70046D2A8 /* ZFTokenFieldDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZFTokenFieldDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC233D531A1204F70046D2A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC233D541A1204F70046D2A8 /* ZFTokenFieldDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZFTokenFieldDemoTests.m; sourceTree = "<group>"; };
+		DC233D5F1A1205FE0046D2A8 /* ZFTokenField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFTokenField.h; sourceTree = "<group>"; };
+		DC233D601A1205FE0046D2A8 /* ZFTokenField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFTokenField.m; sourceTree = "<group>"; };
+		DC233D621A120FD50046D2A8 /* TokenView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TokenView.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC233D321A1204F70046D2A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC233D4B1A1204F70046D2A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC233D2C1A1204F70046D2A8 = {
+			isa = PBXGroup;
+			children = (
+				DC233D371A1204F70046D2A8 /* ZFTokenFieldDemo */,
+				DC233D511A1204F70046D2A8 /* ZFTokenFieldDemoTests */,
+				DC233D361A1204F70046D2A8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC233D361A1204F70046D2A8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC233D351A1204F70046D2A8 /* ZFTokenFieldDemo.app */,
+				DC233D4E1A1204F70046D2A8 /* ZFTokenFieldDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC233D371A1204F70046D2A8 /* ZFTokenFieldDemo */ = {
+			isa = PBXGroup;
+			children = (
+				DC233D5E1A1205FE0046D2A8 /* Classes */,
+				DC233D3C1A1204F70046D2A8 /* AppDelegate.h */,
+				DC233D3D1A1204F70046D2A8 /* AppDelegate.m */,
+				DC233D3F1A1204F70046D2A8 /* ViewController.h */,
+				DC233D401A1204F70046D2A8 /* ViewController.m */,
+				DC233D421A1204F70046D2A8 /* Main.storyboard */,
+				DC233D451A1204F70046D2A8 /* Images.xcassets */,
+				DC233D471A1204F70046D2A8 /* LaunchScreen.xib */,
+				DC233D381A1204F70046D2A8 /* Supporting Files */,
+				DC233D621A120FD50046D2A8 /* TokenView.xib */,
+			);
+			path = ZFTokenFieldDemo;
+			sourceTree = "<group>";
+		};
+		DC233D381A1204F70046D2A8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC233D391A1204F70046D2A8 /* Info.plist */,
+				DC233D3A1A1204F70046D2A8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC233D511A1204F70046D2A8 /* ZFTokenFieldDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				DC233D541A1204F70046D2A8 /* ZFTokenFieldDemoTests.m */,
+				DC233D521A1204F70046D2A8 /* Supporting Files */,
+			);
+			path = ZFTokenFieldDemoTests;
+			sourceTree = "<group>";
+		};
+		DC233D521A1204F70046D2A8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC233D531A1204F70046D2A8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC233D5E1A1205FE0046D2A8 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DC233D5F1A1205FE0046D2A8 /* ZFTokenField.h */,
+				DC233D601A1205FE0046D2A8 /* ZFTokenField.m */,
+			);
+			name = Classes;
+			path = ../../Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DC233D341A1204F70046D2A8 /* ZFTokenFieldDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC233D581A1204F70046D2A8 /* Build configuration list for PBXNativeTarget "ZFTokenFieldDemo" */;
+			buildPhases = (
+				DC233D311A1204F70046D2A8 /* Sources */,
+				DC233D321A1204F70046D2A8 /* Frameworks */,
+				DC233D331A1204F70046D2A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZFTokenFieldDemo;
+			productName = ZFTokenFieldDemo;
+			productReference = DC233D351A1204F70046D2A8 /* ZFTokenFieldDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DC233D4D1A1204F70046D2A8 /* ZFTokenFieldDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC233D5B1A1204F70046D2A8 /* Build configuration list for PBXNativeTarget "ZFTokenFieldDemoTests" */;
+			buildPhases = (
+				DC233D4A1A1204F70046D2A8 /* Sources */,
+				DC233D4B1A1204F70046D2A8 /* Frameworks */,
+				DC233D4C1A1204F70046D2A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC233D501A1204F70046D2A8 /* PBXTargetDependency */,
+			);
+			name = ZFTokenFieldDemoTests;
+			productName = ZFTokenFieldDemoTests;
+			productReference = DC233D4E1A1204F70046D2A8 /* ZFTokenFieldDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC233D2D1A1204F70046D2A8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Amornchai Kanokpullwad";
+				TargetAttributes = {
+					DC233D341A1204F70046D2A8 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					DC233D4D1A1204F70046D2A8 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = DC233D341A1204F70046D2A8;
+					};
+				};
+			};
+			buildConfigurationList = DC233D301A1204F70046D2A8 /* Build configuration list for PBXProject "ZFTokenFieldDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DC233D2C1A1204F70046D2A8;
+			productRefGroup = DC233D361A1204F70046D2A8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC233D341A1204F70046D2A8 /* ZFTokenFieldDemo */,
+				DC233D4D1A1204F70046D2A8 /* ZFTokenFieldDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DC233D331A1204F70046D2A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC233D441A1204F70046D2A8 /* Main.storyboard in Resources */,
+				DC233D491A1204F70046D2A8 /* LaunchScreen.xib in Resources */,
+				DC233D631A120FD50046D2A8 /* TokenView.xib in Resources */,
+				DC233D461A1204F70046D2A8 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC233D4C1A1204F70046D2A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC233D311A1204F70046D2A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC233D411A1204F70046D2A8 /* ViewController.m in Sources */,
+				DC233D3E1A1204F70046D2A8 /* AppDelegate.m in Sources */,
+				DC233D611A1205FE0046D2A8 /* ZFTokenField.m in Sources */,
+				DC233D3B1A1204F70046D2A8 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC233D4A1A1204F70046D2A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC233D551A1204F70046D2A8 /* ZFTokenFieldDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DC233D501A1204F70046D2A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC233D341A1204F70046D2A8 /* ZFTokenFieldDemo */;
+			targetProxy = DC233D4F1A1204F70046D2A8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DC233D421A1204F70046D2A8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC233D431A1204F70046D2A8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DC233D471A1204F70046D2A8 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC233D481A1204F70046D2A8 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DC233D561A1204F70046D2A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DC233D571A1204F70046D2A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DC233D591A1204F70046D2A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ZFTokenFieldDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DC233D5A1A1204F70046D2A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ZFTokenFieldDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DC233D5C1A1204F70046D2A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ZFTokenFieldDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZFTokenFieldDemo.app/ZFTokenFieldDemo";
+			};
+			name = Debug;
+		};
+		DC233D5D1A1204F70046D2A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ZFTokenFieldDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZFTokenFieldDemo.app/ZFTokenFieldDemo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC233D301A1204F70046D2A8 /* Build configuration list for PBXProject "ZFTokenFieldDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC233D561A1204F70046D2A8 /* Debug */,
+				DC233D571A1204F70046D2A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC233D581A1204F70046D2A8 /* Build configuration list for PBXNativeTarget "ZFTokenFieldDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC233D591A1204F70046D2A8 /* Debug */,
+				DC233D5A1A1204F70046D2A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC233D5B1A1204F70046D2A8 /* Build configuration list for PBXNativeTarget "ZFTokenFieldDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC233D5C1A1204F70046D2A8 /* Debug */,
+				DC233D5D1A1204F70046D2A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC233D2D1A1204F70046D2A8 /* Project object */;
+}

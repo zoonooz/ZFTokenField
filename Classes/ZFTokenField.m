@@ -132,6 +132,7 @@
         NSUInteger count = [self.dataSource numberOfTokenInField:self];
         for (int i = 0 ; i < count ; i++) {
             UIView *tokenView = [self.dataSource tokenField:self viewForTokenAtIndex:i];
+            tokenView.autoresizingMask = UIViewAutoresizingNone;
             [self addSubview:tokenView];
             [self.tokenViews addObject:tokenView];
         }
@@ -150,6 +151,11 @@
     return self.tokenViews.count - 1;
 }
 
+- (NSUInteger)indexOfTokenView:(UIView *)view
+{
+    return [self.tokenViews indexOfObject:view];
+}
+
 #pragma mark - Private
 
 - (void)enumerateItemRectsUsingBlock:(void (^)(CGRect itemRect))block
@@ -165,24 +171,25 @@
     
     for (UIView *token in self.tokenViews) {
         CGFloat width = MAX(CGRectGetWidth(self.bounds), CGRectGetWidth(token.frame));
-        if (x > width - CGRectGetWidth(token.frame)) {
-            y += lineHeight;
+        CGFloat tokenWidth = MIN(CGRectGetWidth(self.bounds), CGRectGetWidth(token.frame));
+        if (x > width - tokenWidth) {
+            y += lineHeight + margin;
             x = 0;
             rowCount = 0;
         }
         
-        if ([token isKindOfClass:[UITextField class]]) {
+        if ([token isKindOfClass:[ZFTokenTextField class]]) {
             UITextField *textField = (UITextField *)token;
             CGSize size = [textField sizeThatFits:(CGSize){CGRectGetWidth(self.bounds), lineHeight}];
             size.height = lineHeight;
             if (size.width > CGRectGetWidth(self.bounds)) {
                 size.width = CGRectGetWidth(self.bounds);
             }
-            token.frame = (CGRect){token.frame.origin, size};
+            token.frame = (CGRect){{x, y}, size};
         }
         
-        block((CGRect){{x, y}, token.frame.size});
-        x += CGRectGetWidth(token.frame) + margin;
+        block((CGRect){x, y, tokenWidth, token.frame.size.height});
+        x += tokenWidth + margin;
         rowCount++;
     }
 }
@@ -239,6 +246,14 @@
     if ([self.delegate respondsToSelector:@selector(tokenField:didTextChanged:)]) {
         [self.delegate tokenField:self didTextChanged:textField.text];
     }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([self.delegate respondsToSelector:@selector(tokenField:didReturnWithText:)]) {
+        [self.delegate tokenField:self didReturnWithText:textField.text];
+    }
+    return YES;
 }
 
 @end
