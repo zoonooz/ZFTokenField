@@ -5,6 +5,10 @@ iOS custom view that let you add token view inside like NSTokenField
 
 <p align="center"><img src="https://raw.githubusercontent.com/zoonooz/ZFTokenField/master/Screenshot/ss.png"/></p>
 
+## Installation
+
+```pod 'ZFTokenField'```
+
 ## Usage
 
 ### ZFTokenFieldDataSource
