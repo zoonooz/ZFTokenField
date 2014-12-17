@@ -16,6 +16,7 @@
 		DC233D551A1204F70046D2A8 /* ZFTokenFieldDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC233D541A1204F70046D2A8 /* ZFTokenFieldDemoTests.m */; };
 		DC233D611A1205FE0046D2A8 /* ZFTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = DC233D601A1205FE0046D2A8 /* ZFTokenField.m */; };
 		DC233D631A120FD50046D2A8 /* TokenView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC233D621A120FD50046D2A8 /* TokenView.xib */; };
+		F5BB82C91A41240E00BAB84E /* Mail.png in Resources */ = {isa = PBXBuildFile; fileRef = F5BB82C81A41240E00BAB84E /* Mail.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		DC233D5F1A1205FE0046D2A8 /* ZFTokenField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFTokenField.h; sourceTree = "<group>"; };
 		DC233D601A1205FE0046D2A8 /* ZFTokenField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFTokenField.m; sourceTree = "<group>"; };
 		DC233D621A120FD50046D2A8 /* TokenView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TokenView.xib; sourceTree = "<group>"; };
+		F5BB82C81A41240E00BAB84E /* Mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mail.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				DC233D3C1A1204F70046D2A8 /* AppDelegate.h */,
 				DC233D3D1A1204F70046D2A8 /* AppDelegate.m */,
 				DC233D3F1A1204F70046D2A8 /* ViewController.h */,
+				F5BB82C81A41240E00BAB84E /* Mail.png */,
 				DC233D401A1204F70046D2A8 /* ViewController.m */,
 				DC233D421A1204F70046D2A8 /* Main.storyboard */,
 				DC233D451A1204F70046D2A8 /* Images.xcassets */,
@@ -218,6 +221,7 @@
 			files = (
 				DC233D441A1204F70046D2A8 /* Main.storyboard in Resources */,
 				DC233D491A1204F70046D2A8 /* LaunchScreen.xib in Resources */,
+				F5BB82C91A41240E00BAB84E /* Mail.png in Resources */,
 				DC233D631A120FD50046D2A8 /* TokenView.xib in Resources */,
 				DC233D461A1204F70046D2A8 /* Images.xcassets in Resources */,
 			);
