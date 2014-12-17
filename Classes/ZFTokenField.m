@@ -248,12 +248,51 @@
     }
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if([string isEqualToString:@" "]){
+        if(![self checkEmailAndDisplayAlert]){
+            return NO;
+        }else{
+            [self.delegate tokenField:self didReturnWithText:textField.text];
+            return YES;
+        }
+    }
+    return YES;
+    
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if ([self.delegate respondsToSelector:@selector(tokenField:didReturnWithText:)]) {
-        [self.delegate tokenField:self didReturnWithText:textField.text];
+        
+        if(![self checkEmailAndDisplayAlert]){
+            return NO;
+        }else{
+            [self.delegate tokenField:self didReturnWithText:textField.text];
+        return YES;
     }
-    return YES;
+    
+    }else{
+        return NO;
+    }
+}
+- (BOOL)validateEmail:(NSString *)emailStr {
+    NSString *regex1 = @"\\A[a-z0-9]+([-._][a-z0-9]+)*@([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,4}\\z";
+    NSString *regex2 = @"^(?=.{1,64}@.{4,64}$)(?=.{6,100}$).*";
+    NSPredicate *test1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex1];
+    NSPredicate *test2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex2];
+    return [test1 evaluateWithObject:emailStr] || [test2 evaluateWithObject:emailStr];
+}
+
+- (BOOL)checkEmailAndDisplayAlert {
+    if(![self validateEmail:self.textField.text ]) {
+        // user entered invalid email address
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid email address." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 @end

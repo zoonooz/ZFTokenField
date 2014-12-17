@@ -21,6 +21,8 @@
     [super viewDidLoad];
     
     self.tokens = [NSMutableArray array];
+    self.tokenField.textField.keyboardType = UIKeyboardTypeEmailAddress;
+    self.tokenField.textField.autocorrectionType= UITextAutocorrectionTypeNo;
     
     self.tokenField.dataSource = self;
     self.tokenField.delegate = self;
