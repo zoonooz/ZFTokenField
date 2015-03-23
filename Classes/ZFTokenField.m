@@ -190,12 +190,15 @@
         if ([token isKindOfClass:[ZFTokenTextField class]]) {
             UITextField *textField = (UITextField *)token;
             UIScrollView /* UIFieldEditor */ *editor = nil;
+            UILabel /* UITextFieldLabel */ *label = nil;
             for (UIView *v in textField.subviews) {
                 if ([NSStringFromClass(v.class) isEqualToString:@"UIFieldEditor"]) {
                     editor = (UIScrollView *)v;
+                } else if ([NSStringFromClass(v.class) isEqualToString:@"UITextFieldLabel"]) {
+                    label = (UILabel *)v;
                 }
             }
-            CGSize size = { editor ? editor.contentSize.width : 5, lineHeight};
+            CGSize size = { MAX(editor.contentSize.width, [label sizeThatFits:CGRectInfinite.size].width + margin), lineHeight};
             if (size.width > maxWidth) {
                 size.width = maxWidth;
             }
