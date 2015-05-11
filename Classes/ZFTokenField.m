@@ -96,6 +96,14 @@
     [self reloadData];
 }
 
+- (BOOL)editable {
+    return !self.textField.hidden;
+}
+
+- (void)setEditable:(BOOL)editable {
+    self.textField.hidden = !editable;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -121,7 +129,7 @@
     }];
     
     CGFloat margin = [self.delegate tokenMarginInTokenInField:self];
-    totalRect.size.height += margin * 2;
+    totalRect.size.height += margin;
     return totalRect.size;
 }
 
@@ -167,7 +175,6 @@
 
 - (void)enumerateItemRectsUsingBlock:(void (^)(CGRect itemRect))block
 {
-    NSUInteger rowCount = 0;
     CGFloat x = 0, y = 0;
     CGFloat margin = 0;
     CGFloat lineHeight = [self.dataSource lineHeightForTokenInField:self];
@@ -184,29 +191,33 @@
         if (x - margin + tokenWidth > width) {
             y += lineHeight + margin;
             x = margin;
-            rowCount = 0;
         }
         
-        if ([token isKindOfClass:[ZFTokenTextField class]]) {
-            UITextField *textField = (UITextField *)token;
-            UIScrollView /* UIFieldEditor */ *editor = nil;
-            UILabel /* UITextFieldLabel */ *label = nil;
-            for (UIView *v in textField.subviews) {
-                if ([NSStringFromClass(v.class) isEqualToString:@"UIFieldEditor"]) {
-                    editor = (UIScrollView *)v;
-                } else if ([NSStringFromClass(v.class) isEqualToString:@"UITextFieldLabel"]) {
-                    label = (UILabel *)v;
+        if (token == self.textField) {
+            if (self.editable) {
+                UIScrollView /* UIFieldEditor */ *editor = nil;
+                UILabel /* UITextFieldLabel */ *label = nil;
+                for (UIView *v in token.subviews) {
+                    if ([NSStringFromClass(v.class) isEqualToString:@"UIFieldEditor"]) {
+                        editor = (UIScrollView *)v;
+                    } else if ([NSStringFromClass(v.class) isEqualToString:@"UITextFieldLabel"]) {
+                        label = (UILabel *)v;
+                    }
                 }
+                CGSize size = { MAX(editor.contentSize.width, [label sizeThatFits:CGRectInfinite.size].width + margin), lineHeight};
+                if (size.width > maxWidth) {
+                    size.width = maxWidth;
+                }
+                token.frame = (CGRect){{x, y}, size};
+            } else {
+                token.frame = CGRectZero;
             }
-            CGSize size = { MAX(editor.contentSize.width, [label sizeThatFits:CGRectInfinite.size].width + margin), lineHeight};
-            if (size.width > maxWidth) {
-                size.width = maxWidth;
-            }
-            token.frame = (CGRect){{x, y}, size};
+            block(token.frame);
+            x += token.frame.size.width + margin;
+        } else {
+            block((CGRect){x, y, tokenWidth, lineHeight});
+            x += tokenWidth + margin;
         }
-        block((CGRect){x, y, tokenWidth, lineHeight});
-        x += tokenWidth + margin;
-        rowCount++;
     }
 }
 

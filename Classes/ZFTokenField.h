@@ -35,7 +35,7 @@
 
 @property (nonatomic, weak) IBOutlet id<ZFTokenFieldDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet id<ZFTokenFieldDelegate> delegate;
-
+@property (nonatomic, assign) BOOL editable;
 @property (nonatomic, strong, readonly) ZFTokenTextField *textField;
 
 - (void)reloadData;
