@@ -10,36 +10,32 @@
 
 @class ZFTokenField;
 
-@interface ZFTokenTextField : UITextField
-@end
-
 @protocol ZFTokenFieldDataSource <NSObject>
 @required
-- (CGFloat)lineHeightForTokenInField:(ZFTokenField *)tokenField;
-- (NSUInteger)numberOfTokenInField:(ZFTokenField *)tokenField;
-- (UIView *)tokenField:(ZFTokenField *)tokenField viewForTokenAtIndex:(NSUInteger)index;
+- (CGFloat)lineHeightForTokenField:(ZFTokenField *)tokenField;
+- (CGFloat)tokenMarginForTokenField:(ZFTokenField *)tokenField;
+- (NSInteger)numberOfTokensInTokenField:(ZFTokenField *)tokenField;
+- (UIView *)tokenField:(ZFTokenField *)tokenField viewForTokenAtIndex:(NSInteger)index;
 @end
 
-@protocol ZFTokenFieldDelegate <NSObject>
+@protocol ZFTokenFieldDelegate <UITextFieldDelegate>
 @optional
-- (CGFloat)tokenMarginInTokenInField:(ZFTokenField *)tokenField;
-- (void)tokenField:(ZFTokenField *)tokenField didRemoveTokenAtIndex:(NSUInteger)index;
+- (void)tokenField:(ZFTokenField *)tokenField didRemoveTokenAtIndex:(NSInteger)index;
 - (void)tokenField:(ZFTokenField *)tokenField didReturnWithText:(NSString *)text;
-- (void)tokenField:(ZFTokenField *)tokenField didTextChanged:(NSString *)text;
-- (void)tokenFieldDidBeginEditing:(ZFTokenField *)tokenField;
-- (BOOL)tokenFieldShouldEndEditing:(ZFTokenField *)textField;
-- (void)tokenFieldDidEndEditing:(ZFTokenField *)tokenField;
+- (void)tokenFieldDidReloadData:(ZFTokenField *)tokenField;
 @end
 
-@interface ZFTokenField : UIControl
-
+@interface ZFTokenField : UIControl <UITextFieldDelegate>
 @property (nonatomic, weak) IBOutlet id<ZFTokenFieldDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet id<ZFTokenFieldDelegate> delegate;
 @property (nonatomic, assign) BOOL editable;
-@property (nonatomic, strong, readonly) ZFTokenTextField *textField;
-
+@property (nonatomic, assign) BOOL shouldAutomaticallyRemoveToken;
+@property (nonatomic, strong, readonly) UITextField *textField;
 - (void)reloadData;
-- (NSUInteger)numberOfToken;
-- (NSUInteger)indexOfTokenView:(UIView *)view;
+- (NSInteger)numberOfToken;
+- (NSInteger)indexOfTokenView:(UIView *)view;
+@end
 
+@interface _ZFTokenFieldTextField : UITextField
+@property (nonatomic, weak) ZFTokenField *tokenField;
 @end
