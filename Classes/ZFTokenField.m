@@ -8,49 +8,26 @@
 
 #import "ZFTokenField.h"
 
-@interface ZFTokenTextField ()
-- (NSString *)rawText;
+@interface ZFTokenField ()
+
+- (void)textFieldWillDeleteBackward:(_ZFTokenFieldTextField *)textField;
+
 @end
 
-@implementation ZFTokenTextField
+@implementation _ZFTokenFieldTextField
 
-- (void)setText:(NSString *)text
-{
-    if ([text isEqualToString:@""]) {
-        if (((ZFTokenField *)self.superview).numberOfToken > 0) {
-            text = @"\u200B";
-        }
+- (void)deleteBackward {
+    if (self.tokenField) {
+        [self.tokenField textFieldWillDeleteBackward:self];
     }
-    [super setText:text];
-}
-
-- (NSString *)text
-{
-    return [super.text stringByReplacingOccurrencesOfString:@"\u200B" withString:@""];
-}
-
-- (NSString *)rawText
-{
-    return super.text;
-}
-
-- (void)addGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
-{
-    //Prevent zooming
-    if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
-        gestureRecognizer.enabled = NO;
-    }
-    [super addGestureRecognizer:gestureRecognizer];
-    return;
+    [super deleteBackward];
 }
 
 @end
 
-@interface ZFTokenField () <UITextFieldDelegate>
-@property (nonatomic, strong) ZFTokenTextField *textField;
+@interface ZFTokenField ()
+@property (nonatomic, strong) _ZFTokenFieldTextField *textField;
 @property (nonatomic, strong) NSMutableArray *tokenViews;
-
-@property (nonatomic, strong) NSString *tempTextFieldText;
 @end
 
 @implementation ZFTokenField
@@ -64,16 +41,13 @@
     return self;
 }
 
-- (void)awakeFromNib
+- (instancetype)initWithCoder:(NSCoder *)coder
 {
-    [super awakeFromNib];
-    [self setup];
-}
-
-- (BOOL)focusOnTextField
-{
-    [self.textField becomeFirstResponder];
-    return YES;
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self setup];
+    }
+    return self;
 }
 
 #pragma mark -
@@ -81,15 +55,23 @@
 - (void)setup
 {
     self.clipsToBounds = YES;
-    [self addTarget:self action:@selector(focusOnTextField) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.textField = [[ZFTokenTextField alloc] init];
+    self.shouldAutomaticallyRemoveToken = YES;
+    self.textField = [[_ZFTokenFieldTextField alloc] init];
     self.textField.borderStyle = UITextBorderStyleNone;
     self.textField.backgroundColor = [UIColor clearColor];
     self.textField.delegate = self;
-    [self.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    ((_ZFTokenFieldTextField *)self.textField).tokenField = self;
+    self.textField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     
     [self reloadData];
+}
+
+- (BOOL)editable {
+    return self.textField.enabled;
+}
+
+- (void)setEditable:(BOOL)editable {
+    self.textField.enabled = editable;
 }
 
 - (void)layoutSubviews
@@ -115,6 +97,9 @@
     [self enumerateItemRectsUsingBlock:^(CGRect itemRect) {
         totalRect = CGRectUnion(itemRect, totalRect);
     }];
+    
+    CGFloat margin = [self.dataSource tokenMarginForTokenField:self];
+    totalRect.size.height += margin * 2;
     return totalRect.size;
 }
 
@@ -124,12 +109,14 @@
 {
     // clear
     for (UIView *view in self.tokenViews) {
-        [view removeFromSuperview];
+        if (view != self.textField) {
+            [view removeFromSuperview];
+        }
     }
     self.tokenViews = [NSMutableArray array];
     
     if (self.dataSource) {
-        NSUInteger count = [self.dataSource numberOfTokenInField:self];
+        NSInteger count = [self.dataSource numberOfTokensInTokenField:self];
         for (int i = 0 ; i < count ; i++) {
             UIView *tokenView = [self.dataSource tokenField:self viewForTokenAtIndex:i];
             tokenView.autoresizingMask = UIViewAutoresizingNone;
@@ -140,18 +127,20 @@
     
     [self.tokenViews addObject:self.textField];
     [self addSubview:self.textField];
-    self.textField.frame = (CGRect) {0,0,50,[self.dataSource lineHeightForTokenInField:self]};
+    self.textField.frame = (CGRect){0, 0, 0, [self.dataSource lineHeightForTokenField:self]};
     
     [self invalidateIntrinsicContentSize];
-    [self.textField setText:@""];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tokenFieldDidReloadData:)]) {
+        [self.delegate tokenFieldDidReloadData:self];
+    }
 }
 
-- (NSUInteger)numberOfToken
+- (NSInteger)numberOfToken
 {
     return self.tokenViews.count - 1;
 }
 
-- (NSUInteger)indexOfTokenView:(UIView *)view
+- (NSInteger)indexOfTokenView:(UIView *)view
 {
     return [self.tokenViews indexOfObject:view];
 }
@@ -160,100 +149,100 @@
 
 - (void)enumerateItemRectsUsingBlock:(void (^)(CGRect itemRect))block
 {
-    NSUInteger rowCount = 0;
     CGFloat x = 0, y = 0;
-    CGFloat margin = 0;
-    CGFloat lineHeight = [self.dataSource lineHeightForTokenInField:self];
-    
-    if ([self.delegate respondsToSelector:@selector(tokenMarginInTokenInField:)]) {
-        margin = [self.delegate tokenMarginInTokenInField:self];
+    CGFloat _margin = 0;
+    if ([self.dataSource respondsToSelector:@selector(tokenMarginForTokenField:)]) {
+        x = y = _margin = [self.dataSource tokenMarginForTokenField:self];
     }
+    const CGFloat margin = _margin;
+    const CGFloat width = CGRectGetWidth(self.bounds);
+    const CGFloat lineHeight = [self.dataSource lineHeightForTokenField:self];
     
     for (UIView *token in self.tokenViews) {
-        CGFloat width = MAX(CGRectGetWidth(self.bounds), CGRectGetWidth(token.frame));
-        CGFloat tokenWidth = MIN(CGRectGetWidth(self.bounds), CGRectGetWidth(token.frame));
-        if (x > width - tokenWidth) {
+        CGRect rect = CGRectMake(x, y, MIN(CGRectGetWidth(token.frame), width - 2 * margin), CGRectGetHeight(token.frame));
+        if (token == self.textField) {
+            if (self.editable) {
+                rect = CGRectMake(x, y, width - x - margin, lineHeight);
+            } else {
+                rect = CGRectMake(x, y, 0, 0);
+            }
+        }
+        if (CGRectGetMaxX(rect) > width - margin && CGRectGetMinX(rect) > margin) {
+            x = margin;
             y += lineHeight + margin;
-            x = 0;
-            rowCount = 0;
+            rect.origin = (CGPoint){x, y};
         }
-        
-        if ([token isKindOfClass:[ZFTokenTextField class]]) {
-            UITextField *textField = (UITextField *)token;
-            CGSize size = [textField sizeThatFits:(CGSize){CGRectGetWidth(self.bounds), lineHeight}];
-            size.height = lineHeight;
-            if (size.width > CGRectGetWidth(self.bounds)) {
-                size.width = CGRectGetWidth(self.bounds);
-            }
-            token.frame = (CGRect){{x, y}, size};
-        }
-        
-        block((CGRect){x, y, tokenWidth, token.frame.size.height});
-        x += tokenWidth + margin;
-        rowCount++;
+        x += CGRectGetWidth(rect) + margin;
+        block(rect);
     }
 }
 
-#pragma mark - TextField
+#pragma mark - UITextFieldDelegate
 
-- (void)textFieldDidBeginEditing:(ZFTokenTextField *)textField
-{
-    self.tempTextFieldText = [textField rawText];
-    
-    if ([self.delegate respondsToSelector:@selector(tokenFieldDidBeginEditing:)]) {
-        [self.delegate tokenFieldDidBeginEditing:self];
-    }
-}
-
-- (BOOL)textFieldShouldEndEditing:(ZFTokenTextField *)textField
-{
-    if ([self.delegate respondsToSelector:@selector(tokenFieldShouldEndEditing:)]) {
-        return [self.delegate tokenFieldShouldEndEditing:self];
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
+        return [self.delegate textFieldShouldBeginEditing:textField];
     }
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(ZFTokenTextField *)textField
-{
-    if ([self.delegate respondsToSelector:@selector(tokenFieldDidEndEditing:)]) {
-        [self.delegate tokenFieldDidEndEditing:self];
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldDidBeginEditing:)]) {
+        [self.delegate textFieldDidBeginEditing:textField];
     }
 }
 
-- (void)textFieldDidChange:(ZFTokenTextField *)textField
-{
-    if ([[textField rawText] isEqualToString:@""]) {
-        textField.text = @"\u200B";
-        
-        if ([self.tempTextFieldText isEqualToString:@"\u200B"]) {
-            if (self.tokenViews.count > 1) {
-                NSUInteger removeIndex = self.tokenViews.count - 2;
-                [self.tokenViews[removeIndex] removeFromSuperview];
-                [self.tokenViews removeObjectAtIndex:removeIndex];
-                
-                [self.textField setText:@""];
-                
-                if ([self.delegate respondsToSelector:@selector(tokenField:didRemoveTokenAtIndex:)]) {
-                    [self.delegate tokenField:self didRemoveTokenAtIndex:removeIndex];
-                }
-            }
-        }
-    }
-    
-    self.tempTextFieldText = [textField rawText];
-    [self invalidateIntrinsicContentSize];
-    
-    if ([self.delegate respondsToSelector:@selector(tokenField:didTextChanged:)]) {
-        [self.delegate tokenField:self didTextChanged:textField.text];
-    }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if ([self.delegate respondsToSelector:@selector(tokenField:didReturnWithText:)]) {
-        [self.delegate tokenField:self didReturnWithText:textField.text];
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
+        return [self.delegate textFieldShouldEndEditing:textField];
     }
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldDidEndEditing:)]) {
+        return [self.delegate textFieldDidEndEditing:textField];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    BOOL value = YES;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
+        value = [self.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
+    }
+    return value;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldShouldClear:)]) {
+        return [self.delegate textFieldShouldClear:textField];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    BOOL value = YES;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldShouldReturn:)]) {
+        value = [self.delegate textFieldShouldReturn:textField];
+    }
+    if (value) {
+        NSString *text = textField.text;
+        textField.text = @"";
+        [self.delegate tokenField:self didReturnWithText:text];
+    }
+    return value;
+}
+
+- (void)textFieldWillDeleteBackward:(_ZFTokenFieldTextField *)textField {
+    if (self.shouldAutomaticallyRemoveToken && textField.text.length == 0 && self.tokenViews.count > 1) {
+        UIView *view = (UIView *)self.tokenViews[self.tokenViews.count - 2];
+        [view removeFromSuperview];
+        [self.tokenViews removeObject:view];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(tokenField:didRemoveTokenAtIndex:)]) {
+            [self.delegate tokenField:self didRemoveTokenAtIndex:self.tokenViews.count - 1];
+        }
+        [self reloadData];
+    }
 }
 
 @end
