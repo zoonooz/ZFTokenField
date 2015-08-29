@@ -18,6 +18,10 @@
 - (CGFloat)lineHeightForTokenInField:(ZFTokenField *)tokenField;
 - (NSUInteger)numberOfTokenInField:(ZFTokenField *)tokenField;
 - (UIView *)tokenField:(ZFTokenField *)tokenField viewForTokenAtIndex:(NSUInteger)index;
+
+@optional
+- (NSString *)tokenFieldPrefixTitle:(ZFTokenField *)tokenField;
+
 @end
 
 @protocol ZFTokenFieldDelegate <NSObject>
@@ -26,6 +30,7 @@
 - (void)tokenField:(ZFTokenField *)tokenField didRemoveTokenAtIndex:(NSUInteger)index;
 - (void)tokenField:(ZFTokenField *)tokenField didReturnWithText:(NSString *)text;
 - (void)tokenField:(ZFTokenField *)tokenField didTextChanged:(NSString *)text;
+- (void)tokenField:(ZFTokenField*)tokenField didResizeHeight:(CGFloat)height;
 - (void)tokenFieldDidBeginEditing:(ZFTokenField *)tokenField;
 - (BOOL)tokenFieldShouldEndEditing:(ZFTokenField *)textField;
 - (void)tokenFieldDidEndEditing:(ZFTokenField *)tokenField;
@@ -37,6 +42,8 @@
 @property (nonatomic, weak) IBOutlet id<ZFTokenFieldDelegate> delegate;
 
 @property (nonatomic, strong, readonly) ZFTokenTextField *textField;
+
+@property (nonatomic, assign) NSInteger maxLine;
 
 - (void)reloadData;
 - (NSUInteger)numberOfToken;
