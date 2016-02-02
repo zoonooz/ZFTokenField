@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author             = { "Unity App Studio" => "admin@unityappstudio.com" }
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/unityappstudio/ZFTokenField.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/unityappstudio/ZFTokenField.git", :commit => 'f4e77ca' }
   s.source_files  = "Classes", "Classes/**/*.{h,m}"
   s.requires_arc = true
 end
