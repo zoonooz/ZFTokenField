@@ -14,7 +14,7 @@
 		DC233D461A1204F70046D2A8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC233D451A1204F70046D2A8 /* Images.xcassets */; };
 		DC233D491A1204F70046D2A8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC233D471A1204F70046D2A8 /* LaunchScreen.xib */; };
 		DC233D551A1204F70046D2A8 /* ZFTokenFieldDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC233D541A1204F70046D2A8 /* ZFTokenFieldDemoTests.m */; };
-		DC233D611A1205FE0046D2A8 /* ZFTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = DC233D601A1205FE0046D2A8 /* ZFTokenField.m */; };
+		DC233D611A1205FE0046D2A8 /* IAWTokenTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DC233D601A1205FE0046D2A8 /* IAWTokenTextField.m */; };
 		DC233D631A120FD50046D2A8 /* TokenView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC233D621A120FD50046D2A8 /* TokenView.xib */; };
 /* End PBXBuildFile section */
 
@@ -42,8 +42,8 @@
 		DC233D4E1A1204F70046D2A8 /* ZFTokenFieldDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZFTokenFieldDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC233D531A1204F70046D2A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC233D541A1204F70046D2A8 /* ZFTokenFieldDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZFTokenFieldDemoTests.m; sourceTree = "<group>"; };
-		DC233D5F1A1205FE0046D2A8 /* ZFTokenField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFTokenField.h; sourceTree = "<group>"; };
-		DC233D601A1205FE0046D2A8 /* ZFTokenField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFTokenField.m; sourceTree = "<group>"; };
+		DC233D5F1A1205FE0046D2A8 /* IAWTokenTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAWTokenTextField.h; sourceTree = "<group>"; };
+		DC233D601A1205FE0046D2A8 /* IAWTokenTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAWTokenTextField.m; sourceTree = "<group>"; };
 		DC233D621A120FD50046D2A8 /* TokenView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TokenView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,8 +129,8 @@
 		DC233D5E1A1205FE0046D2A8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DC233D5F1A1205FE0046D2A8 /* ZFTokenField.h */,
-				DC233D601A1205FE0046D2A8 /* ZFTokenField.m */,
+				DC233D5F1A1205FE0046D2A8 /* IAWTokenTextField.h */,
+				DC233D601A1205FE0046D2A8 /* IAWTokenTextField.m */,
 			);
 			name = Classes;
 			path = ../../Classes;
@@ -239,7 +239,7 @@
 			files = (
 				DC233D411A1204F70046D2A8 /* ViewController.m in Sources */,
 				DC233D3E1A1204F70046D2A8 /* AppDelegate.m in Sources */,
-				DC233D611A1205FE0046D2A8 /* ZFTokenField.m in Sources */,
+				DC233D611A1205FE0046D2A8 /* IAWTokenTextField.m in Sources */,
 				DC233D3B1A1204F70046D2A8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

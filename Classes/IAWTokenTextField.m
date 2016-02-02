@@ -6,31 +6,28 @@
 //  Copyright (c) 2014 Amornchai Kanokpullwad. All rights reserved.
 //
 
-#import "ZFTokenField.h"
+#import "IAWCustomTokenField.h"
 
-@interface ZFTokenTextField ()
-- (NSString *)rawText;
+@interface IAWTokenTextField ()
+- (NSString*)rawText;
 @end
 
-@implementation ZFTokenTextField
+@implementation IAWTokenTextField
 
-- (void)setText:(NSString *)text
-{
+- (void)setText:(NSString*)text {
     if ([text isEqualToString:@""]) {
-        if (((ZFTokenField *)self.superview).numberOfToken > 0) {
+        if (((IAWCustomTokenField*)self.superview.superview).numberOfToken > 0) {
             text = @"\u200B";
         }
     }
     [super setText:text];
 }
 
-- (NSString *)text
-{
+- (NSString*)text {
     return [super.text stringByReplacingOccurrencesOfString:@"\u200B" withString:@""];
 }
 
-- (NSString *)rawText
-{
+- (NSString*)rawText {
     return super.text;
 }
 
@@ -44,8 +41,7 @@
     return CGRectInset(bounds, 10, 10);
 }
 
-- (void)addGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
-{
+- (void)addGestureRecognizer:(UIGestureRecognizer*)gestureRecognizer {
     //Prevent zooming
     if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
         gestureRecognizer.enabled = NO;
@@ -56,17 +52,18 @@
 
 @end
 
-@interface ZFTokenField () <UITextFieldDelegate>
-@property (nonatomic, strong) ZFTokenTextField *textField;
-@property (nonatomic, strong) NSMutableArray *tokenViews;
-
-@property (nonatomic, strong) NSString *tempTextFieldText;
-
+@interface IAWCustomTokenField () <UITextFieldDelegate>
+{
+    UITapGestureRecognizer* tapGesture;
+}
+@property (nonatomic, strong) IAWTokenTextField* textField;
+@property (nonatomic, strong) NSMutableArray* tokenViews;
 @property (nonatomic, strong) UIScrollView* scrollView;
 
+@property (nonatomic, strong) NSString* tempTextFieldText;
 @end
 
-@implementation ZFTokenField
+@implementation IAWCustomTokenField
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -74,6 +71,10 @@
         [self setup];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self removeGestureRecognizer:tapGesture];
 }
 
 - (void)awakeFromNib {
@@ -92,19 +93,28 @@
     self.clipsToBounds = YES;
     [self addTarget:self action:@selector(focusOnTextField) forControlEvents:UIControlEventTouchUpInside];
     
-    self.textField                 = [[ZFTokenTextField alloc] init];
-    self.textField.borderStyle     = UITextBorderStyleNone;
-    self.textField.backgroundColor = [UIColor clearColor];
-    self.textField.delegate        = self;
+    self.textField                    = [[IAWTokenTextField alloc] init];
+    self.textField.borderStyle        = UITextBorderStyleNone;
+    self.textField.backgroundColor    = [UIColor clearColor];
+    self.textField.delegate           = self;
+    self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.textField.returnKeyType      = UIReturnKeyDone;
+    
     [self.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     self.scrollView                        = [[UIScrollView alloc] init];
     self.scrollView.backgroundColor        = [UIColor clearColor];
     self.scrollView.directionalLockEnabled = YES;
     
+    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView:)];
+    [self addGestureRecognizer:tapGesture];
     self.tokenViews = [NSMutableArray array];
     
     [self reloadData];
+}
+
+- (void)tapView:(UITapGestureRecognizer*)gesture {
+    [self focusOnTextField];
 }
 
 - (void)layoutSubviews {
@@ -129,10 +139,10 @@
     }];
     
     CGFloat maxHeight    = self.maxLine* [self.dataSource lineHeightForTokenInField:self];
-    CGFloat scrollHeight = MIN(totalRect.size.height, maxHeight);
+    CGFloat scrollHeight = totalRect.size.height >= maxHeight ? maxHeight : totalRect.size.height;
     
     self.scrollView.contentSize = totalRect.size;
-    [self.scrollView setFrame:CGRectMake(0, 0, self.frame.size.width, scrollHeight)];
+    [self.scrollView setFrame:CGRectMake(0, 0, self.frameSizeWidth, scrollHeight)];
     
     CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
     [self.scrollView setContentOffset:bottomOffset animated:YES];
@@ -154,20 +164,14 @@
     [self.tokenViews removeAllObjects];
     [self.scrollView removeFromSuperview];
     
-    /* Title view */
-    NSString *title = @"";
-    if ([self.dataSource respondsToSelector:@selector(tokenFieldPrefixTitle:)]) {
-        title = [self.dataSource tokenFieldPrefixTitle:self];
-    }
     UILabel* label = [[UILabel alloc] init];
-    [label setText:title];
+    [label setText:LocalizedString(@"add:")];
     label.backgroundColor = [UIColor clearColor];
     label.textColor       = [UIColor colorWithRed:149. / 255. green:149. / 255. blue:149. / 255. alpha:1.];
-
+    
     [self.scrollView addSubview:label];
     [self.tokenViews addObject:label];
     
-    /* Token view */
     if (self.dataSource) {
         NSUInteger count = [self.dataSource numberOfTokenInField:self];
         for (int i = 0; i < count; i++) {
@@ -217,7 +221,7 @@
             rowCount = 0;
         }
         
-        if ([token isKindOfClass:[ZFTokenTextField class]]) {
+        if ([token isKindOfClass:[IAWTokenTextField class]]) {
             UITextField* textField = (UITextField*)token;
             CGSize size            = [textField sizeThatFits:(CGSize){CGRectGetWidth(self.bounds), lineHeight}];
             size.height = lineHeight;
@@ -228,10 +232,8 @@
         }
         
         if ([token isKindOfClass:[UILabel class]]) {
+            x = x + 10;
             UILabel* label = (UILabel*)token;
-            if (label.text.length) {
-                x = x + 10;
-            }
             CGSize size    = [label sizeThatFits:(CGSize){CGRectGetWidth(self.bounds), lineHeight}];
             label.frame = (CGRect){{x, (lineHeight - size.height) / 2}, size};
         }
@@ -244,7 +246,7 @@
 
 #pragma mark - TextField
 
-- (void)textFieldDidBeginEditing:(ZFTokenTextField*)textField {
+- (void)textFieldDidBeginEditing:(IAWTokenTextField*)textField {
     if (textField.text.length == 0) {
         textField.text = @"";
     }
@@ -254,14 +256,14 @@
     }
 }
 
-- (BOOL)textFieldShouldEndEditing:(ZFTokenTextField*)textField {
+- (BOOL)textFieldShouldEndEditing:(IAWTokenTextField*)textField {
     if ([self.delegate respondsToSelector:@selector(tokenFieldShouldEndEditing:)]) {
         return [self.delegate tokenFieldShouldEndEditing:self];
     }
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(ZFTokenTextField*)textField {
+- (void)textFieldDidEndEditing:(IAWTokenTextField*)textField {
     if (textField.text.length == 0 || [textField.text isEqualToString:@""]) {
         textField.text = nil;
     }
@@ -271,7 +273,7 @@
     }
 }
 
-- (void)textFieldDidChange:(ZFTokenTextField*)textField {
+- (void)textFieldDidChange:(IAWTokenTextField*)textField {
     if ([[textField rawText] isEqualToString:@""]) {
         textField.text = @"\u200B";
         
