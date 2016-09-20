@@ -115,6 +115,7 @@
     [self enumerateItemRectsUsingBlock:^(CGRect itemRect) {
         totalRect = CGRectUnion(itemRect, totalRect);
     }];
+    [self.delegate tokenFieldFrameDidChange:totalRect];
     return totalRect.size;
 }
 
