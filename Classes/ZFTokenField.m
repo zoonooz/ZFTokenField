@@ -182,6 +182,7 @@
             UITextField *textField = (UITextField *)token;
             CGSize size = [textField sizeThatFits:(CGSize){CGRectGetWidth(self.bounds), lineHeight}];
             size.height = lineHeight;
+            size.width += 16; // margin right
             if (size.width > CGRectGetWidth(self.bounds)) {
                 size.width = CGRectGetWidth(self.bounds);
             }
