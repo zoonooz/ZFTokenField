@@ -257,4 +257,8 @@
     return YES;
 }
 
+- (BOOL)tokenField:(ZFTokenField *)tokenField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    return true;
+}
+
 @end
