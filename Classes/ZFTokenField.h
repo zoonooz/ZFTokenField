@@ -29,6 +29,7 @@
 - (void)tokenFieldDidBeginEditing:(ZFTokenField *)tokenField;
 - (BOOL)tokenFieldShouldEndEditing:(ZFTokenField *)textField;
 - (void)tokenFieldDidEndEditing:(ZFTokenField *)tokenField;
+- (BOOL)tokenField:(ZFTokenField *)tokenField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 @end
 
 @interface ZFTokenField : UIControl
